@@ -1,0 +1,72 @@
+<div id="products-container">
+  <ul class="grid grid-cols-5 gap-6">
+    {{#each products}}
+    <li
+      class="group block w-[300] p-2 shadow-md transition-transform duration-75 ease-in hover:translate-y-1"
+    >
+      <a href="/products/product/{{this.id}}">
+        <img class="inset-0 h-[300] w-full object-cover" src="{{this.image}}" />
+        <div class="flex flex-col bg-white pt-3">
+          <span
+            class="text-md text-gray-700 group-hover:underline group-hover:underline-offset-4"
+            >{{this.name}}</span
+          >
+          <span class="mt-1.5 text-xl font-medium tracking-wide text-gray-900"
+            >${{this.price}}</span
+          >
+        </div>
+      </a>
+    </li>
+    {{/each}}
+  </ul>
+  
+  <div
+    class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+  >
+    <div class="flex flex-1 justify-between sm:hidden">
+      <a
+        href="#"
+        class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >Previous</a
+      >
+      <a
+        href="#"
+        class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >Next</a
+      >
+    </div>
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+      <div>
+        <p class="text-sm text-gray-700">
+          Page
+          <span class="font-medium">{{page}}</span>          
+          of
+          <span class="font-medium">{{length pages}}</span>
+        </p>
+      </div>
+      <div>
+        <nav
+          class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+          aria-label="Pagination"
+        >
+          {{#each pages}}
+          <button
+            hx-get="/products/all/{{this}}"
+            hx-trigger="click"
+            hx-target="#products-container"
+            hx-swap="outerHTML"
+            {{#eq ../page this}}
+            class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            {{else}}
+            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            {{/eq}}
+            
+            >{{this}}</button
+          >
+          {{/each}} 
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,45 @@
+<div class="mx-auto w-1/2 pt-20">
+  <img
+    alt="ecommerce"
+    class="inline-block h-64 w-full rounded object-cover object-center"
+    src="{{image}}"
+  />
+  <div class="flex gap-2 pt-4">
+    <h1 class="text-4xl">{{name}}</h1>
+    <span class="self-end text-gray-400">{{quantity}} piece(s) available</span>
+    <span class="">${{price}}</span>
+  </div>
+  <p class="py-6">{{description}}</p>
+
+  {{#if isAdmin}}
+  <a
+    href="/products/update/{{id}}"
+    class="inline-block rounded-md bg-green-600 p-2 text-white hover:bg-green-500"
+  >
+    Update
+  </a>
+  <button
+    hx-delete="/products/{{id}}"
+    hx-swap="none"
+    hx-confirm="Are you sure you wish to delete this product?"
+    class="cursor-pointer rounded-md bg-red-600 p-2 text-white hover:bg-red-500"
+  >
+    Delete
+  </button>
+  {{/if}} {{#if isAuthenticated}} {{#not isAdmin}}
+  <form
+    hx-confirm="Are you sure you wish to add to cart?"
+    hx-post="/cart"
+    hx-swap="none"
+  >
+    <input type="number" value="1" name="quantity" />
+    <input type="hidden" value="{{id}}" name="productId" />
+    <button
+      type="submit"
+      class="cursor-pointer rounded-md bg-blue-600 p-2 text-white hover:bg-blue-500"
+    >
+      Add
+    </button>
+  </form>
+  {{/not}} {{/if}}
+</div>

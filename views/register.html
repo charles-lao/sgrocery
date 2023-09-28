@@ -1,0 +1,95 @@
+<div class="container mx-auto py-10">
+  <h1 class="mb-6 mt-10 text-center text-2xl font-bold">Register</h1>
+  <form
+    class="mx-auto w-full max-w-sm rounded-md bg-white p-8 shadow-md"
+    x-data="{ isValid: true, password: '' }"
+    hx-post="/auth/register"
+    hx-swap="none"
+  >
+    <div class="mb-4">
+      <label class="mb-2 block text-sm font-bold text-gray-700" for="name">
+        Name
+      </label>
+      <input
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none"
+        type="text"
+        id="name"
+        name="name"
+        placeholder="John Doe"
+        pattern="^[A-Za-z\s\-]+$"
+        minlength="4"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label class="mb-2 block text-sm font-bold text-gray-700" for="address">
+        Address
+      </label>
+      <input
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none"
+        type="text"
+        id="address"
+        name="address"
+        placeholder="Auckland City, New Zealand"
+        minlength="6"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label class="mb-2 block text-sm font-bold text-gray-700" for="username">
+        Username
+      </label>
+      <input
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none"
+        type="text"
+        id="username"
+        name="username"
+        placeholder="johndoe123"
+        minlength="4"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label class="mb-2 block text-sm font-bold text-gray-700" for="password">
+        Password
+      </label>
+      <input
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none"
+        type="password"
+        id="password"
+        name="password"
+        placeholder="********"
+        minlength="6"
+        required
+        x-model="password"
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="mb-2 block text-sm font-bold text-gray-700"
+        for="confirm-password"
+      >
+        Confirm Password
+      </label>
+      <input
+        class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:outline-none"
+        type="password"
+        id="confirm-password"
+        placeholder="********"
+        minlength="6"
+        required
+        @keyup.debounce.500ms="isValid = $el.value === password"
+      />
+      <span class="text-red-500" x-show="!isValid" x-cloak>
+        Passwords do not match
+      </span>
+    </div>
+    <button
+      class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:bg-gray-400"
+      type="submit"
+      :disabled="!isValid"
+    >
+      Register
+    </button>
+  </form>
+</div>

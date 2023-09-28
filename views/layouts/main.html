@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Title</title>
+    <link href="/index.css" rel="stylesheet" />
+    <!-- Alpine Plugins -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+    ></script>
+    <!-- Alpine Core -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <!-- Htmx Core -->
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    {{#not hideNav}}
+    <nav class="flex h-20 items-center gap-4 bg-blue-300 px-2">
+      <a
+        href="/"
+        class="border-red-400 text-xl font-bold duration-75 hover:border-b-4"
+      >
+        Home
+      </a>
+
+      {{#not isAdmin}}
+      <a
+        href="/cart"
+        class="border-red-400 text-xl font-bold duration-75 hover:border-b-4"
+      >
+        Cart
+      </a>
+
+      <a
+        href="/cart/delivery"
+        class="border-red-400 text-xl font-bold duration-75 hover:border-b-4"
+      >
+        For delivery
+      </a>
+      {{/not}}
+
+      <!-- ---- -->
+
+      {{#if isAdmin}}
+      <a
+        href="/products/add"
+        class="border-red-400 text-xl font-bold duration-75 hover:border-b-4"
+      >
+        Add Product
+      </a>
+      {{/if}}
+
+      <!-- ----- -->
+
+      {{#if isAuthenticated}}
+      <button
+        hx-post="/auth/signout"
+        hx-swap="none"
+        class="ml-auto border-red-400 text-xl font-bold duration-75 hover:border-b-4"
+      >
+        Sign Out
+      </button>
+      {{/if}}
+    </nav>
+    {{/not}}
+
+    <!-- ---- -->
+
+    {{{body}}}
+  </body>
+</html>

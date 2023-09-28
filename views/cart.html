@@ -1,0 +1,37 @@
+<h1 class="text-center text-2xl font-medium">Cart</h1>
+<form
+  hx-confirm="Are you sure you want to check out for delivery?"
+  hx-post="/cart/checkout"
+  class="flex flex-col gap-2 px-4"
+>
+  {{#each cartItems}}
+  <div id="item-{{id}}" class="flex border-b border-black">
+    <input type="checkbox" value="{{this.id}}" name="id" />
+    <div>
+      <img class="h-[300px] w-[300px]" src="{{this.product.image}}" />
+      <label>{{this.product.name}}</label>
+      <div>
+        <p>
+          Quantity: <span id="quantity-{{this.id}}">{{this.quantity}}</span>
+        </p>
+        <button type="button" hx-patch="/cart/increment/{{id}}" hx-swap="none">
+          +</button
+        ><button type="button" hx-patch="/cart/decrement/{{id}}" hx-swap="none">
+          -
+        </button>
+      </div>
+      <p>Price: $<span id="price-{{this.id}}">{{this.price}}</span></p>
+    </div>
+    <button
+      hx-confirm="Are you sure you want to remove this from the cart?"
+      hx-delete="/cart/{{id}}"
+      hx-swap="delete"
+      hx-target="#item-{{id}}"
+      type="button"
+    >
+      &#10005;
+    </button>
+  </div>
+  {{/each}}
+  <button type="submit">Checkout</button>
+</form>

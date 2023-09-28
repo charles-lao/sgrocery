@@ -1,0 +1,19 @@
+<h1 class="text-center text-2xl font-medium">Cart</h1>
+<div hx-post="/cart/checkout" class="flex flex-col gap-2 px-4">
+  {{#each cartItems}}
+  <div id="item-{{id}}" class="flex border-b border-black">
+    <div>
+      <img class="h-[300px] w-[300px]" src="{{this.product.image}}" />
+      <label>{{this.product.name}}</label>
+      <div>
+        <p>
+          Quantity: <span id="quantity-{{this.id}}">{{this.quantity}}</span>
+        </p>
+      </div>
+      <p>Price: $<span id="price-{{this.id}}">{{this.price}}</span></p>
+    </div>
+  </div>
+  {{/each}}
+  <p>Total: {{total}}</p>
+  <p>For delivery to: {{address}}</p>
+</div>

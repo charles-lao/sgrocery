@@ -1,0 +1,86 @@
+<form
+  hx-{{method}}="{{url}}"
+  class="container max-w-sm mx-auto bg-white p-8 rounded-md shadow-lg"
+  hx-encoding="multipart/form-data"
+>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+      Image
+    </label>
+    <input
+      required
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+      type="file"
+      id="image"
+      name="image"
+    />
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+      Name
+    </label>
+    <input
+      required
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Tang Juice"
+      value="{{name}}"
+    />
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+      Description
+    </label>
+    <textarea
+      required
+      rows="4"
+      name="description"
+      id="description"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+      placeholder="This product is ..."
+    >{{description}}</textarea>
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+      Price
+    </label>
+    <input
+      required
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+      type="number"
+      id="price"
+      name="price"
+      step="0.01"
+      {{#if quantity }}
+      value="{{price}}"
+      {{else}}
+      value="1"
+      {{/if}}
+      />
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="quantity">
+      Quantity
+    </label>
+    <input
+      required
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+      type="number"
+      id="quantity"
+      name="quantity"
+      {{#if quantity }}
+      value="{{quantity}}"
+      {{else}}
+      value="1"
+      {{/if}}
+      />
+  </div>
+  <button
+    class="w-full bg-indigo-500 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
+    type="submit"
+  >
+    {{buttonLabel}}
+  </button>
+</form>
