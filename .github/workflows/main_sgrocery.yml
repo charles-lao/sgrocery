@@ -25,13 +25,13 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present -- --passWithNoTests
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: dist
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'sgrocery'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A81C1C60B0D342A580CA1E11484D7A1E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9DD58C599E334EA4BE97D3CADF73404A }}
           package: .
