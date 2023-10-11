@@ -27,6 +27,12 @@ import { CartModule } from './cart/cart.module';
         database: configService.get('DB_NAME'),
         autoLoadEntities: true,
         synchronize: configService.get('DB_SYNCHRONIZE') === 'TRUE',
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
       inject: [ConfigService],
     }),
